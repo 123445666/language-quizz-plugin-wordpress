@@ -29,8 +29,8 @@ function lang_quizz_modifymenu()
 
   //this is the main item for the menu
   add_menu_page(
-    'Testimonials', //page title
-    'Cute Testimonials', //menu title
+    'Language Quizz', //page title
+    'Language Quizz', //menu title
     'manage_options', //capabilities
     'lang_quizz_list', //menu slug
     'lang_quizz_list' //function
@@ -39,7 +39,7 @@ function lang_quizz_modifymenu()
   //this is a submenu
   add_submenu_page(
     'lang_quizz_list', //parent slug
-    'Add New Testimonial', //page title
+    'Add New Language Quizz', //page title
     'Add New', //menu title
     'manage_options', //capability
     'lang_quizz_create', //menu slug
@@ -49,7 +49,7 @@ function lang_quizz_modifymenu()
   //this submenu is HIDDEN, however, we need to add it anyways
   add_submenu_page(
     null, //parent slug
-    'Update Testimonial', //page title
+    'Update Language Quizz', //page title
     'Update', //menu title
     'manage_options', //capability
     'lang_quizz_update', //menu slug
@@ -57,6 +57,6 @@ function lang_quizz_modifymenu()
   ); //function
 }
 define('ROOTDIR', plugin_dir_path(__FILE__));
-require_once(ROOTDIR . 'testimonials-list.php');
-require_once(ROOTDIR . 'testimonials-create.php');
-require_once(ROOTDIR . 'testimonials-update.php');
+require_once(ROOTDIR . 'lang-quizz-list.php');
+require_once(ROOTDIR . 'lang-quizz-create.php');
+require_once(ROOTDIR . 'lang-quizz-update.php');

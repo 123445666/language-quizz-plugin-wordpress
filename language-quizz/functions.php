@@ -1,10 +1,19 @@
 <?php
-/*
-Plugin Name: Language Quizz
-Description:
-Version: 1
-Author: funaway89
-*/
+/**
+ * Plugin Name:       Language Quizz
+ * Plugin URI:        https://tiengphapvui.com
+ * Description:       Image Language Quizz Plugin.
+ * Version:           1.0.0
+ * Requires at least: 5.2
+ * Requires PHP:      7.2
+ * Author:            Funaway89
+ * Author URI:        https://tiengphapvui.com/
+ * License:           GPL v2 or later
+ * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
+ * Update URI:        https://example.com/my-plugin/
+ * Text Domain:       language-quizz
+ */
+
 define('MY_PLUGIN_FILE_PATH', __FILE__);
 define('MY_PLUGIN_DIR_PATH', plugin_dir_path(__FILE__));
 
@@ -59,8 +68,6 @@ function lang_quizz_shortcode()
   </div>`;
 
   $html = '';
-  $html .= '<link rel="stylesheet" href="' . plugins_url('assets/css/style.css', __FILE__) . '">';
-
   $html .= '<div class="container">';
   $html .= '<div class="row">';
   $html .= '<div class="col-md-12">';
@@ -78,16 +85,7 @@ function lang_quizz_shortcode()
     $html .= "</div>";
   }
   $html .= "</div></div></div></div>";
-
-  $html .= '<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>';
-  $html .= '<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.js"></script>';
-  $html .= '<script type="text/javascript" src="' . plugins_url('assets/js/lang-quizz-front.js', __FILE__) . '"></script>';
-
   // Things that you want to do. 
-
-
-
-  $template_tarot = '<div class="tarot-post-deck text-center row margin-bottom-10 justify-content-center align-items-center">';
 
   // Output needs to be return
   return $html;
