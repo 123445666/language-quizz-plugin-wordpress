@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS `lang_quizz` (
+  `id` int CHARACTER SET utf8 NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) CHARACTER SET utf8 NOT NULL,
+  `image` varchar(500) CHARACTER SET utf8 NOT NULL,
+  `notes` varchar(500) CHARACTER SET utf8 NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
