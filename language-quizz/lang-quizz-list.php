@@ -22,14 +22,14 @@ function lang_quizz_list() {
                 <th class="manage-column ss-list-width">ID</th>
                 <th class="manage-column ss-list-width">Name</th>
                 <th class="manage-column ss-list-width">Image</th>
-                <th class="manage-column ss-list-width">Review</th>
+                <th class="manage-column ss-list-width">Notes</th>
                 <th>&nbsp;</th>
             </tr>
             <?php foreach ($rows as $row) { ?>
                 <tr>
                     <td class="manage-column ss-list-width"><?php echo $row->id; ?></td>
                     <td class="manage-column ss-list-width"><?php echo stripslashes($row->name); ?></td>
-                    <td class="manage-column ss-list-width"><img src="<?php echo wp_get_attachment_url($row->image) ?>" class="image" style="margin-top:10px;width:200px;" /></td>
+                    <td class="manage-column ss-list-width"><img src="<?php echo $row->image ?>" class="image" style="margin-top:10px;width:200px;" /></td>
                     <td class="manage-column ss-list-width"><?php echo stripslashes($row->notes); ?></td>
                     <td><a href="<?php echo admin_url('admin.php?page=lang_quizz_update&id=' . $row->id); ?>">Edit</a></td>
                 </tr>

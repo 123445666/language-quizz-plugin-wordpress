@@ -3,8 +3,8 @@ function lang_quizz_create()
 {
   $id = $_POST["id"];
   $name = $_POST["name"];
-  // $image = $_POST["image"];
-  $image = $_POST["attachment_id"];
+  $image = $_POST["image"];
+  // $image = $_POST["attachment_id"];
   $notes = $_POST["notes"];
   //insert
 
@@ -36,14 +36,14 @@ function lang_quizz_create()
           <tr>
             <th class="ss-th-width">Image</th>
             <td>
-              <input type="button" value="Upload Image" class="button-primary" id="upload_image" />
+              <!-- <input type="button" value="Upload Image" class="button-primary" id="upload_image" />
               <input type="<?php echo (empty($image) ? "hidden" : "text"); ?>" name="attachment_id" class="wp_attachment_id" value="<?php echo $image; ?>" /> </br>
-              <img src="" class="image" style="display:none;margin-top:10px;width:200px;" />
-              <!-- <input type="file" id="upload_image" name="image" value="<?php echo $image; ?>" class="ss-field-width" /> -->
+              <img src="" class="image" style="display:none;margin-top:10px;width:200px;" /> -->
+              <input type="file" id="upload_image" name="image" value="<?php echo $image; ?>" class="ss-field-width" />
             </td>
           </tr>
           <tr>
-            <th class="ss-th-width">Review</th>
+            <th class="ss-th-width">Notes</th>
             <td><textarea rows="4" cols="100" name="notes" value="<?php echo $notes; ?>" class="ss-field-width"></textarea></td>
           </tr>
         </table>

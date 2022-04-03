@@ -6,7 +6,7 @@ function lang_quizz_update()
   $table_name = $wpdb->prefix . "lang_quizz";
   $id = $_GET["id"];
   $name = $_POST["name"];
-  $image = $_POST["attachment_id"];
+  $image = $_POST["image"];
   $notes = $_POST["notes"];
   //update
   if (isset($_POST['update'])) {
@@ -30,7 +30,7 @@ function lang_quizz_update()
     }
   }
 ?>
-  <link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/cute-testimonials/style-admin.css" rel="stylesheet" />
+  <link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/language-quizz/css/style-admin.css" rel="stylesheet" />
   <div class="wrap">
     <h2>Testimonials</h2>
 
@@ -38,13 +38,13 @@ function lang_quizz_update()
       <div class="updated">
         <p>Testimonial deleted</p>
       </div>
-      <a href="<?php echo admin_url('admin.php?page=lang_quizz_list') ?>">&laquo; Back to Testimonials list</a>
+      <a href="<?php echo admin_url('admin.php?page=lang_quizz_list') ?>">&laquo; Back to Quizz list</a>
 
     <?php } else if ($_POST['update']) { ?>
       <div class="updated">
-        <p>Testimonial updated</p>
+        <p>Quizz updated</p>
       </div>
-      <a href="<?php echo admin_url('admin.php?page=lang_quizz_list') ?>">&laquo; Back to Testimonials list</a>
+      <a href="<?php echo admin_url('admin.php?page=lang_quizz_list') ?>">&laquo; Back to Quizz list</a>
 
     <?php } else { ?>
       <form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
@@ -56,9 +56,11 @@ function lang_quizz_update()
           <tr>
             <th>Image</th>
             <td>
-              <input type="button" value="Upload Image" class="button-primary" id="upload_image" />
+              <!-- <input type="button" value="Upload Image" class="button-primary" id="upload_image" />
               <input type="hidden" name="attachment_id" class="wp_attachment_id" value="<?php echo $image; ?>" /> </br>
-              <img src="<?php echo wp_get_attachment_url($image) ?>" class="image" style="margin-top:10px;width:200px;" />
+              <img src="<?php echo wp_get_attachment_url($image) ?>" class="image" style="margin-top:10px;width:200px;" /> -->
+              <input type="file" id="upload_image" name="image" value="<?php echo $image; ?>" class="ss-field-width" />
+              <img src="<?php echo $image ?>" class="image" style="margin-top:10px;width:200px;" />
             </td>
           </tr>
           <tr>

@@ -37,7 +37,7 @@ function lang_quizz_shortcode()
   global $wpdb;
 
   $table_name = $wpdb->prefix . "lang_quizz";
-  $rows = $wpdb->get_results("SELECT name,image,notes from $table_name");
+  $rows = $wpdb->get_results("SELECT name,image,notes from $table_name LIMIT 4");
 
   $html = `
   <div class="grid">
