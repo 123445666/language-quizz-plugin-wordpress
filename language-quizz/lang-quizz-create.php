@@ -1,9 +1,12 @@
 <?php
+
 function lang_quizz_create()
 {
   $id = $_POST["id"];
   $name = $_POST["name"];
-  $image = $_POST["image"];
+  $image = $_FILES["image"];
+  $tmp_name = $image["tmp_name"];
+  $image_name = "";
   // $image = $_POST["attachment_id"];
   $notes = $_POST["notes"];
   //insert
@@ -11,10 +14,17 @@ function lang_quizz_create()
   if (isset($_POST['insert'])) {
     global $wpdb;
     $table_name = $wpdb->prefix . "lang_quizz";
+    if ($tmp_name != "") {
+      $path_array = wp_upload_dir(); // normal format start
+      $file_name   =   pathinfo($image['name'], PATHINFO_FILENAME) . "." . strtolower(pathinfo($image['name'], PATHINFO_EXTENSION));
+      //$imgtype     =   strtolower(pathinfo($tmp_name, PATHINFO_EXTENSION));
+      $image_name  =   $path_array['baseurl'] . "/quizz/" . $file_name;
 
+      move_uploaded_file($tmp_name, $path_array['basedir'] . "/quizz/" . $file_name);
+    }
     $wpdb->insert(
       $table_name, //table
-      array('name' => $name, 'image' => $image, 'notes' => $notes), //data
+      array('name' => $name, 'image' => $image_name, 'notes' => $notes), //data
       array('%s', '%s') //data format			
     );
     $message .= "Testimonial inserted";
@@ -27,7 +37,7 @@ function lang_quizz_create()
         <p><?php echo $message; ?></p>
       </div><?php endif; ?>
     <?php if (!isset($_POST['insert'])) { ?>
-      <form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
+      <form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>" enctype="multipart/form-data">
         <table class='wp-list-table widefat fixed'>
           <tr>
             <th class="ss-th-width">Name</th>

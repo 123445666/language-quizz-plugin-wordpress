@@ -6,13 +6,26 @@ function lang_quizz_update()
   $table_name = $wpdb->prefix . "lang_quizz";
   $id = $_GET["id"];
   $name = $_POST["name"];
-  $image = $_POST["image"];
+  $image = $_FILES["image"];
+  $oldimage = $_POST["old-image"];
+  $tmp_name = $image["tmp_name"];
+  $image_name = $oldimage;
+
   $notes = $_POST["notes"];
   //update
   if (isset($_POST['update'])) {
+    if ($tmp_name != "") {
+      $path_array = wp_upload_dir(); // normal format start
+      $file_name   =   pathinfo($image['name'], PATHINFO_FILENAME) . "." . strtolower(pathinfo($image['name'], PATHINFO_EXTENSION));
+      //$imgtype     =   strtolower(pathinfo($tmp_name, PATHINFO_EXTENSION));
+      $image_name  =   $path_array['baseurl'] . "/quizz/" . $file_name;
+
+      move_uploaded_file($tmp_name, $path_array['basedir'] . "/quizz/" . $file_name);
+    }
+
     $wpdb->update(
       $table_name, //table
-      array('name' => $name, 'image' => $image, 'notes' => $notes), //data
+      array('name' => $name, 'image' => $image_name, 'notes' => $notes), //data
       array('ID' => $id), //where
       array('%s'), //data format
       array('%s') //where format
@@ -47,7 +60,7 @@ function lang_quizz_update()
       <a href="<?php echo admin_url('admin.php?page=lang_quizz_list') ?>">&laquo; Back to Quizz list</a>
 
     <?php } else { ?>
-      <form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
+      <form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>" enctype="multipart/form-data">
         <table class='wp-list-table widefat fixed'>
           <tr>
             <th>Name</th>
@@ -60,6 +73,7 @@ function lang_quizz_update()
               <input type="hidden" name="attachment_id" class="wp_attachment_id" value="<?php echo $image; ?>" /> </br>
               <img src="<?php echo wp_get_attachment_url($image) ?>" class="image" style="margin-top:10px;width:200px;" /> -->
               <input type="file" id="upload_image" name="image" value="<?php echo $image; ?>" class="ss-field-width" />
+              <input type="hidden" name="old-image" value="<?php echo $image ?>" />
               <img src="<?php echo $image ?>" class="image" style="margin-top:10px;width:200px;" />
             </td>
           </tr>
