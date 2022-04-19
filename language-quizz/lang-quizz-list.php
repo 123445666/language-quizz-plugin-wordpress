@@ -4,10 +4,10 @@ function lang_quizz_list() {
     ?>
     <link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/cute-testimonials/style-admin.css" rel="stylesheet" />
     <div class="wrap">
-        <h2>Testimonials</h2>
+        <h2><?php echo QUIZZ_PLUGIN_NAME; ?></h2>
         <div class="tablenav top">
             <div class="alignleft actions">
-                <a href="<?php echo admin_url('admin.php?page=lang_quizz_create'); ?>">Add New</a>
+                <a href="<?php echo admin_url('admin.php?page=lang_quizz_create'); ?>"><?php echo QUIZZ_PLUGIN_CREATE; ?></a>
             </div>
             <br class="clear">
         </div>

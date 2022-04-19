@@ -15,12 +15,11 @@ function lang_quizz_update()
   //update
   if (isset($_POST['update'])) {
     if ($tmp_name != "") {
-      $path_array = wp_upload_dir(); // normal format start
       $file_name   =   pathinfo($image['name'], PATHINFO_FILENAME) . "." . strtolower(pathinfo($image['name'], PATHINFO_EXTENSION));
       //$imgtype     =   strtolower(pathinfo($tmp_name, PATHINFO_EXTENSION));
-      $image_name  =   $path_array['baseurl'] . "/quizz/" . $file_name;
+      $image_name  =   QUIZZ_PLUGIN_IMAGES_UPLOADED_URL . $file_name;
 
-      move_uploaded_file($tmp_name, $path_array['basedir'] . "/quizz/" . $file_name);
+      move_uploaded_file($tmp_name, QUIZZ_PLUGIN_IMAGES_UPLOADED_DIR . $file_name);
     }
 
     $wpdb->update(
@@ -45,19 +44,19 @@ function lang_quizz_update()
 ?>
   <link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/language-quizz/css/style-admin.css" rel="stylesheet" />
   <div class="wrap">
-    <h2>Testimonials</h2>
+    <h2><?php echo QUIZZ_PLUGIN_EDIT; ?></h2>
 
     <?php if ($_POST['delete']) { ?>
       <div class="updated">
-        <p>Testimonial deleted</p>
+        <p><?php echo QUIZZ_PLUGIN_MESSAGE_DELETE; ?></p>
       </div>
-      <a href="<?php echo admin_url('admin.php?page=lang_quizz_list') ?>">&laquo; Back to Quizz list</a>
+      <a href="<?php echo admin_url('admin.php?page=lang_quizz_list') ?>">&laquo; Back to <?php echo QUIZZ_PLUGIN_NAME; ?> list</a>
 
     <?php } else if ($_POST['update']) { ?>
       <div class="updated">
-        <p>Quizz updated</p>
+        <p><?php echo QUIZZ_PLUGIN_MESSAGE_EDIT; ?></p>
       </div>
-      <a href="<?php echo admin_url('admin.php?page=lang_quizz_list') ?>">&laquo; Back to Quizz list</a>
+      <a href="<?php echo admin_url('admin.php?page=lang_quizz_list') ?>">&laquo; Back to <?php echo QUIZZ_PLUGIN_NAME; ?> list</a>
 
     <?php } else { ?>
       <form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>" enctype="multipart/form-data">
@@ -78,8 +77,11 @@ function lang_quizz_update()
             </td>
           </tr>
           <tr>
-            <th>Review</th>
-            <td><textarea rows="4" cols="100" name="notes"><?php echo stripslashes($notes); ?></textarea></td>
+            <th>Notes</th>
+            <td>
+              <!-- <textarea rows="4" cols="100" name="notes"><?php echo stripslashes($notes); ?></textarea> -->
+              <?php wp_editor(stripslashes($notes), 'notes', $settings = array('textarea_name' => 'notes')); ?>
+            </td>
           </tr>
         </table>
         <input type='submit' name="update" value='Save' class='button'> &nbsp;&nbsp;

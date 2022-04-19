@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Plugin Name:       Language Quizz
  * Plugin URI:        https://tiengphapvui.com
@@ -15,9 +16,15 @@
  */
 
 define('MY_PLUGIN_FILE_PATH', __FILE__);
-define('MY_PLUGIN_DIR_PATH', plugin_dir_path(__FILE__));
 
-include plugin_dir_path(__FILE__) . 'init.php';
+if (!defined('QUIZZ_PLUGIN_DIR'))
+  define('QUIZZ_PLUGIN_DIR', plugin_dir_path(__FILE__));
+
+
+require_once QUIZZ_PLUGIN_DIR . 'init.php';
+
+require_once QUIZZ_PLUGIN_DIR . 'constants.php';
+
 
 add_action('admin_enqueue_scripts', 'lang_quizz_include_js');
 
@@ -30,14 +37,15 @@ function lang_quizz_include_js()
     wp_enqueue_media();
   }
 
-  wp_enqueue_script('myuploadscript', plugin_dir_url(__FILE__) . 'assets/js/lang-quizz.js', array('jquery'));
+  wp_enqueue_script('myuploadscript', QUIZZ_PLUGIN_URL . 'assets/js/lang-quizz.js', array('jquery'));
 }
 
 add_action('wp_enqueue_scripts', "add_lang_files");
 
-function add_lang_files(){
-  wp_enqueue_script('lang-quizz-script', plugins_url('assets/js/lang-quizz-front.js', __FILE__), false, '1.0.0', true);
-  wp_enqueue_style( 'lang-quizz-stylesheet', plugins_url('assets/css/style.css', __FILE__), false, '1.0.0', 'all');
+function add_lang_files()
+{
+  wp_enqueue_script('lang-quizz-script', QUIZZ_PLUGIN_ASSET . 'js/lang-quizz-front.js', false, '1.0.0', true);
+  wp_enqueue_style('lang-quizz-stylesheet', QUIZZ_PLUGIN_ASSET . '/css/style.css', false, '1.0.0', 'all');
 }
 
 // function that runs when shortcode is called
@@ -50,22 +58,22 @@ function lang_quizz_shortcode()
 
   $html = `
   <div class="grid">
-  <div id="quiz">
-  <h1>Picture Quiz</h1>
-  <hr style="margin-bottom: 20px">
-  <p id="question"></p>
-  <div class="buttons">
-  <button id="btn0"><span id="choice0"></span></button>
-  <button id="btn1"><span id="choice1"></span></button>
-  <button id="btn2"><span id="choice2"></span></button>
-  <button id="btn3"><span id="choice3"></span></button>
-  </div>
-  <hr style="margin-top: 50px">
-  <footer>
-  <p id="progress">Question x of y</p>
-  </footer>
-  </div>
-  </div>`;
+<div id="quiz">
+<h1>Picture Quiz</h1>
+<hr style="margin-bottom: 20px">
+<p id="question"></p>
+<div class="buttons">
+<button id="btn0"><span id="choice0"></span></button>
+<button id="btn1"><span id="choice1"></span></button>
+<button id="btn2"><span id="choice2"></span></button>
+<button id="btn3"><span id="choice3"></span></button>
+</div>
+<hr style="margin-top: 50px">
+<footer>
+<p id="progress">Question x of y</p>
+</footer>
+</div>
+</div>`;
 
   $html = '';
   $html .= '<div class="container">';
@@ -91,4 +99,4 @@ function lang_quizz_shortcode()
   return $html;
 }
 // register shortcode
-add_shortcode('cute-testimonials', 'lang_quizz_shortcode');
+add_shortcode('quizz', 'lang_quizz_shortcode');

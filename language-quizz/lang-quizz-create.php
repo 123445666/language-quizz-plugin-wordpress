@@ -15,24 +15,23 @@ function lang_quizz_create()
     global $wpdb;
     $table_name = $wpdb->prefix . "lang_quizz";
     if ($tmp_name != "") {
-      $path_array = wp_upload_dir(); // normal format start
       $file_name   =   pathinfo($image['name'], PATHINFO_FILENAME) . "." . strtolower(pathinfo($image['name'], PATHINFO_EXTENSION));
       //$imgtype     =   strtolower(pathinfo($tmp_name, PATHINFO_EXTENSION));
-      $image_name  =   $path_array['baseurl'] . "/quizz/" . $file_name;
+      $image_name  =   QUIZZ_PLUGIN_IMAGES_UPLOADED_URL . $file_name;
 
-      move_uploaded_file($tmp_name, $path_array['basedir'] . "/quizz/" . $file_name);
+      move_uploaded_file($tmp_name, QUIZZ_PLUGIN_IMAGES_UPLOADED_DIR . $file_name);
     }
     $wpdb->insert(
       $table_name, //table
       array('name' => $name, 'image' => $image_name, 'notes' => $notes), //data
       array('%s', '%s') //data format			
     );
-    $message .= "Testimonial inserted";
+    $message .= QUIZZ_PLUGIN_NAME . " inserted";
   }
 ?>
   <link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/language-quizz/style-admin.css" rel="stylesheet" />
   <div class="wrap">
-    <h2>Add New Testimonial</h2>
+    <h2><?php echo QUIZZ_PLUGIN_CREATE; ?></h2>
     <?php if (isset($message)) : ?><div class="updated">
         <p><?php echo $message; ?></p>
       </div><?php endif; ?>
@@ -60,7 +59,7 @@ function lang_quizz_create()
         <input type='submit' name="insert" value='Save' class='button'>
       </form>
     <?php } else { ?>
-      <a href="<?php echo admin_url('admin.php?page=lang_quizz_list') ?>">&laquo; Back to Testimonials list</a>
+      <a href="<?php echo admin_url('admin.php?page=lang_quizz_list') ?>">&laquo; Back to <?php echo QUIZZ_PLUGIN_NAME; ?> list</a>
     <?php } ?>
 
   </div>
