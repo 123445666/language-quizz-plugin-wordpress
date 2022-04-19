@@ -9,6 +9,9 @@ function lang_quizz_list() {
             <div class="alignleft actions">
                 <a href="<?php echo admin_url('admin.php?page=lang_quizz_create'); ?>"><?php echo QUIZZ_PLUGIN_CREATE; ?></a>
             </div>
+            <div class="alignleft actions">
+                <a href="<?php echo admin_url('admin.php?page=lang_quizz_export_json'); ?>"><?php echo QUIZZ_PLUGIN_EXPORT_JSON; ?></a>
+            </div>
             <br class="clear">
         </div>
         <?php

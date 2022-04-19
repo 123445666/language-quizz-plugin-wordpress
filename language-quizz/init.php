@@ -46,6 +46,15 @@ function lang_quizz_modifymenu()
     'lang_quizz_create'
   ); //function
 
+  add_submenu_page(
+    null, //parent slug
+    'Export Json File', //page title
+    'Export Json File', //menu title
+    'manage_options', //capability
+    'lang_quizz_export_json', //menu slug
+    'lang_quizz_export_json'
+  ); //function
+
   //this submenu is HIDDEN, however, we need to add it anyways
   add_submenu_page(
     null, //parent slug
@@ -60,3 +69,4 @@ define('ROOTDIR', plugin_dir_path(__FILE__));
 require_once(ROOTDIR . 'lang-quizz-list.php');
 require_once(ROOTDIR . 'lang-quizz-create.php');
 require_once(ROOTDIR . 'lang-quizz-update.php');
+require_once(ROOTDIR . 'lang-quizz-export.php');

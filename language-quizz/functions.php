@@ -56,7 +56,7 @@ function lang_quizz_shortcode()
   $table_name = $wpdb->prefix . "lang_quizz";
   $rows = $wpdb->get_results("SELECT name,image,notes from $table_name LIMIT 4");
 
-  $html = `
+  $html = '
   <div class="grid">
 <div id="quiz">
 <h1>Picture Quiz</h1>
@@ -73,26 +73,26 @@ function lang_quizz_shortcode()
 <p id="progress">Question x of y</p>
 </footer>
 </div>
-</div>`;
+</div>';
 
-  $html = '';
-  $html .= '<div class="container">';
-  $html .= '<div class="row">';
-  $html .= '<div class="col-md-12">';
-  $html .= '<div id="testimonial-slider" class="owl-carousel">';
+  // $html = '';
+  // $html .= '<div class="container">';
+  // $html .= '<div class="row">';
+  // $html .= '<div class="col-md-12">';
+  // $html .= '<div id="testimonial-slider" class="owl-carousel">';
 
-  foreach ($rows as $row) {
-    $html .= "<div class='testimonial'>";
-    if (!empty($row->image)) {
-      $html .= "<div class='pic'>";
-      $html .= "<img src='" . wp_get_attachment_url($row->image) . "' />";
-      $html .= "</div>";
-    }
-    $html .= "<div class='description'>" . stripslashes($row->notes) . "</div>";
-    $html .= "<h3 class='testimonial-title'>" . stripslashes($row->name) . "</h3>";
-    $html .= "</div>";
-  }
-  $html .= "</div></div></div></div>";
+  // foreach ($rows as $row) {
+  //   $html .= "<div class='testimonial'>";
+  //   if (!empty($row->image)) {
+  //     $html .= "<div class='pic'>";
+  //     $html .= "<img src='" . wp_get_attachment_url($row->image) . "' />";
+  //     $html .= "</div>";
+  //   }
+  //   $html .= "<div class='description'>" . stripslashes($row->notes) . "</div>";
+  //   $html .= "<h3 class='testimonial-title'>" . stripslashes($row->name) . "</h3>";
+  //   $html .= "</div>";
+  // }
+  // $html .= "</div></div></div></div>";
   // Things that you want to do. 
 
   // Output needs to be return
