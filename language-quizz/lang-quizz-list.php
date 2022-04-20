@@ -19,7 +19,25 @@ function lang_quizz_list()
         global $wpdb;
         $table_name = $wpdb->prefix . "lang_quizz";
 
-        $rows = $wpdb->get_results("SELECT id,name,image,notes from $table_name");
+        $pagenum = isset($_GET['pagenum']) ? absint($_GET['pagenum']) : 1;
+        $limit = 10; // number of rows in page
+        $offset = ($pagenum - 1) * $limit;
+        $total = $wpdb->get_var("SELECT COUNT(`id`) FROM $table_name");
+        $num_of_pages = ceil($total / $limit);
+        $entries = $wpdb->get_results("SELECT * FROM $table_name ORDER BY id DESC LIMIT $offset, $limit");
+        $page_links = paginate_links(array(
+            'base' => add_query_arg('pagenum', '%#%'),
+            'format' => '',
+            'prev_text' => __('&laquo;', 'text-domain'),
+            'next_text' => __('&raquo;', 'text-domain'),
+            'total' => $num_of_pages,
+            'current' => $pagenum
+        ));
+
+        if ($page_links) {
+            echo '<div class="tablenav"><div class="tablenav-pages" style="margin: 1em 0">' . $page_links . '</div></div>';
+        }
+
         ?>
         <table class='wp-list-table widefat fixed striped posts'>
             <tr>
@@ -28,7 +46,7 @@ function lang_quizz_list()
                 <th class="manage-column ss-list-width">Image</th>
                 <th>&nbsp;</th>
             </tr>
-            <?php foreach ($rows as $row) { ?>
+            <?php foreach ($entries as $row) { ?>
                 <tr>
                     <td class="manage-column ss-list-width"><?php echo $row->id; ?></td>
                     <td class="manage-column ss-list-width"><?php echo stripslashes($row->name); ?></td>
@@ -37,6 +55,11 @@ function lang_quizz_list()
                 </tr>
             <?php } ?>
         </table>
+        <?php
+        if ($page_links) {
+            echo '<div class="tablenav"><div class="tablenav-pages" style="margin: 1em 0">' . $page_links . '</div></div>';
+        }
+        ?>
         <div class="tablenav top">
             <div class="alignleft actions">
                 <a href="<?php echo admin_url('admin.php?page=lang_quizz_create'); ?>"><?php echo QUIZZ_PLUGIN_CREATE; ?></a>
