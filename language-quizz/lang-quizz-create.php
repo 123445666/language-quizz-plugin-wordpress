@@ -33,7 +33,7 @@ function lang_quizz_create()
   <div class="wrap">
     <h2><?php echo QUIZZ_PLUGIN_CREATE; ?></h2>
     <?php if (isset($message)) : ?><div class="updated">
-        <p><?php echo $message; ?></p>
+        <p><?php wp_redirect(admin_url('admin.php?page=lang_quizz_list')); ?></p>
       </div><?php endif; ?>
     <?php if (!isset($_POST['insert'])) { ?>
       <form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>" enctype="multipart/form-data">

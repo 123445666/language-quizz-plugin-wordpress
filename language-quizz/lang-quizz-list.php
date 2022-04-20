@@ -1,7 +1,8 @@
 <?php
 
-function lang_quizz_list() {
-    ?>
+function lang_quizz_list()
+{
+?>
     <link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/cute-testimonials/style-admin.css" rel="stylesheet" />
     <div class="wrap">
         <h2><?php echo QUIZZ_PLUGIN_NAME; ?></h2>
@@ -36,6 +37,15 @@ function lang_quizz_list() {
                 </tr>
             <?php } ?>
         </table>
+        <div class="tablenav top">
+            <div class="alignleft actions">
+                <a href="<?php echo admin_url('admin.php?page=lang_quizz_create'); ?>"><?php echo QUIZZ_PLUGIN_CREATE; ?></a>
+            </div>
+            <div class="alignleft actions">
+                <a href="<?php echo admin_url('admin.php?page=lang_quizz_export_json'); ?>"><?php echo QUIZZ_PLUGIN_EXPORT_JSON; ?></a>
+            </div>
+            <br class="clear">
+        </div>
     </div>
-    <?php
+<?php
 }

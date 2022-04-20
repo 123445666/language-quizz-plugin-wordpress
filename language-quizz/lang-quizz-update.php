@@ -48,7 +48,7 @@ function lang_quizz_update()
 
     <?php if ($_POST['delete']) { ?>
       <div class="updated">
-        <p><?php echo QUIZZ_PLUGIN_MESSAGE_DELETE; ?></p>
+        <p><?php wp_redirect(admin_url('admin.php?page=lang_quizz_list')); ?></p>
       </div>
       <a href="<?php echo admin_url('admin.php?page=lang_quizz_list') ?>">&laquo; Back to <?php echo QUIZZ_PLUGIN_NAME; ?> list</a>
 
