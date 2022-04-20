@@ -53,7 +53,10 @@ function lang_quizz_create()
           </tr>
           <tr>
             <th class="ss-th-width">Notes</th>
-            <td><textarea rows="4" cols="100" name="notes" value="<?php echo $notes; ?>" class="ss-field-width"></textarea></td>
+            <td>
+              <!-- <textarea rows="4" cols="100" name="notes" value="<?php echo $notes; ?>" class="ss-field-width"></textarea> -->
+              <?php wp_editor(stripslashes($notes), 'notes', $settings = array('textarea_name' => 'notes')); ?>
+            </td>
           </tr>
         </table>
         <input type='submit' name="insert" value='Save' class='button'>
