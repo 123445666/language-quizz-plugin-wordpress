@@ -11,7 +11,7 @@ body {
 
 .buttons img {
     width: 200px;
-    padding: 30px;
+    padding: 10px;
 }
 
 hr {
@@ -44,7 +44,7 @@ hr {
 #btn1,
 #btn2,
 #btn3 {
-
+    position: relative;
     padding: 0px;
     font-size: 20px;
     color: #fff;
@@ -73,6 +73,7 @@ hr {
 #btn2:focus.right-choice,
 #btn3:focus.right-choice {
     background-color: #07ff07;
+    color: #07ff07;
 }
 
 #btn0:focus.wrong-choice,
@@ -80,17 +81,48 @@ hr {
 #btn2:focus.wrong-choice,
 #btn3:focus.wrong-choice {
     background-color: #ff0707;
+    color: #ff0707;
 }
 
 .right-choice, .right-choice:hover {
     background-color: #07ff07;
+    color: #07ff07;
 }
 
 .wrong-choice, .wrong-choice:hover {
     background-color: #ff0707;
+    color: #ff0707;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: .3s ease;
+    background-color: red;
+}
+
+.quiz-icon {
+    font-size: 100px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
 }
 
 #progress {
     color: #2b2b2b;
     font-size: 18px;
+}
+
+#progress-next {
+    font-size: 20px;
+    color: #ff0707;
 }

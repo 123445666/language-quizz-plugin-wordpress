@@ -61,6 +61,8 @@ function lang_quizz_shortcode()
 <div id="quiz">
 <hr style="margin-bottom: 20px">
 <h2 id="question"></h2>
+<h2 id="question-desc"></h2>
+<p id="progress-next"></p>
 <div class="buttons">
 <button id="btn0"><span id="choice0"></span></button>
 <button id="btn1"><span id="choice1"></span></button>
@@ -69,7 +71,6 @@ function lang_quizz_shortcode()
 </div>
 <hr style="margin-top: 50px">
 <footer>
-<p id="progress-next"></p>
 <p id="progress">Question x of y</p>
 </footer>
 </div>

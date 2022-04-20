@@ -8,8 +8,7 @@ function populate() {
     } else {
       // show question
       var element = document.getElementById("question");
-      element.innerHTML = quiz.getQuestionIndex().text;
-
+      element.innerHTML = quiz.getQuestionIndex().firstItem.name;
       // show options
       var choices = quiz.getQuestionIndex().choices;
       for (var i = 0; i < choices.length; i++) {
@@ -112,7 +111,7 @@ function getDataJson() {
     choiceList = shuffle(choiceList);
 
     questions = [
-      new Question(firstItem.name, choiceList, firstItem.id)
+      new Question(firstItem, choiceList, firstItem.id)
     ]
     return questions;
   });
@@ -123,8 +122,8 @@ var questions = [
 ];
 var totalQuestions = 0;
 
-function Question(text, choices, answer) {
-  this.text = text;
+function Question(firstItem, choices, answer) {
+  this.firstItem = firstItem;
   this.choices = choices;
   this.answer = answer;
 }
@@ -149,6 +148,8 @@ Quiz.prototype.guess = function (answer, buttonElement) {
   if (this.getQuestionIndex().isCorrectAnswer(answer)) {
     this.score++;
     var indexItem = 0;
+    buttonElement.innerHTML += '<div class="quiz-icon"><i class="fa fa-check"></i></div>';
+
     buttonElement.classList.add("right-choice");
     if (localStorage.getItem("currentQuestionNumber") !== null) {
       indexItem = parseInt(localStorage.getItem("currentQuestionNumber"));
@@ -160,9 +161,10 @@ Quiz.prototype.guess = function (answer, buttonElement) {
     this.CountdownTimer();
     return;
   }
+  buttonElement.innerHTML += '<div class="quiz-icon"><i class="fa fa-times"></i></div>';
   buttonElement.classList.add("wrong-choice");
   localStorage.setItem("currentQuestionNumber", 0);
-  this.CountdownTimer();
+  this.RestartQuiz();
 
   //this.questionIndex++;
 }
@@ -176,7 +178,20 @@ Quiz.prototype.CountdownTimer = function () {
   var timeleft = 4;
   var downloadTimer = setInterval(function () {
     timeleft--;
-    document.getElementById("progress-next").textContent = "The next question will begin in " + timeleft + "s";
+    document.getElementById("progress-next").innerHTML = "<p>" + "Số câu đúng " + localStorage.getItem("currentQuestionNumber") + "</p>";
+    document.getElementById("progress-next").innerHTML += "<p>" + "Câu hỏi tiếp theo sẽ xuất hiện trong " + timeleft + "s" + "</p>";
+    if (timeleft == 1) {
+      location.reload();
+      return;
+    }
+  }, 1000);
+}
+
+Quiz.prototype.RestartQuiz = function () {
+  var timeleft = 4;
+  var downloadTimer = setInterval(function () {
+    timeleft--;
+    document.getElementById("progress-next").textContent = "Bạn đã trả lời sai, mọi thứ sẽ bắt đầu lại từ đầu trong " + timeleft + "s";
     if (timeleft == 1) {
       location.reload();
       return;
