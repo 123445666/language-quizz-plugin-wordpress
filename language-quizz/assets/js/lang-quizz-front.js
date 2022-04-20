@@ -34,7 +34,7 @@ function guess(quiz, id, guess) {
 };
 
 function showProgress() {
-  var currentQuestionNumber = quiz.questionIndex + 1;
+  var currentQuestionNumber = localStorage.getItem("currentQuestionNumber");
   var element = document.getElementById("progress");
   element.innerHTML = "Question " + currentQuestionNumber + " of " + totalQuestions;
 };

@@ -59,9 +59,8 @@ function lang_quizz_shortcode()
   $html = '
   <div class="grid">
 <div id="quiz">
-<h1>Picture Quiz</h1>
 <hr style="margin-bottom: 20px">
-<p id="question"></p>
+<h2 id="question"></h2>
 <div class="buttons">
 <button id="btn0"><span id="choice0"></span></button>
 <button id="btn1"><span id="choice1"></span></button>
