@@ -28,8 +28,8 @@ function populate() {
 function guess(quiz, id, guess) {
   var button = document.getElementById(id);
   button.onclick = function () {
-    quiz.guess(guess);
-    populate();
+    quiz.guess(guess, this);
+    //populate();
   }
 };
 
@@ -144,19 +144,25 @@ Quiz.prototype.getQuestionIndex = function () {
   return this.questions[this.questionIndex];
 }
 
-Quiz.prototype.guess = function (answer) {
-  console.log(answer);
-  console.log(this.getQuestionIndex().isCorrectAnswer(answer));
+Quiz.prototype.guess = function (answer, buttonElement) {
+
   if (this.getQuestionIndex().isCorrectAnswer(answer)) {
     this.score++;
     var indexItem = 0;
+    buttonElement.classList.add("right-choice");
     if (localStorage.getItem("currentQuestionNumber") !== null) {
       indexItem = parseInt(localStorage.getItem("currentQuestionNumber"));
       localStorage.setItem("currentQuestionNumber", ++indexItem);
     } else {
       firstItemIndex = localStorage.getItem("currentQuestionNumber");
     }
+
+    this.CountdownTimer();
+    return;
   }
+  buttonElement.classList.add("wrong-choice");
+  localStorage.setItem("currentQuestionNumber", 0);
+  this.CountdownTimer();
 
   //this.questionIndex++;
 }
@@ -166,6 +172,17 @@ Quiz.prototype.isEnded = function () {
   //return this.questionIndex === this.questions.length;
 }
 
+Quiz.prototype.CountdownTimer = function () {
+  var timeleft = 4;
+  var downloadTimer = setInterval(function () {
+    timeleft--;
+    document.getElementById("progress-next").textContent = "The next question will begin in " + timeleft + "s";
+    if (timeleft == 1) {
+      location.reload();
+      return;
+    }
+  }, 1000);
+}
 // display quiz
 populate();
 

@@ -14,16 +14,6 @@ body {
     padding: 30px;
 }
 
-.grid h1 {
-    font-family: "sans-serif";
-    background-color: #ffc107;
-    font-size: 35px;
-    text-align: center;
-    color: #ffffff;
-    padding: 2px 0px;
-    border-radius: 50px;
-}
-
 hr {
     margin-top: 50px;
     color: red;
@@ -76,6 +66,28 @@ hr {
 #btn2:focus,
 #btn3:focus {
     outline: 0;
+}
+
+#btn0:focus.right-choice,
+#btn1:focus.right-choice,
+#btn2:focus.right-choice,
+#btn3:focus.right-choice {
+    background-color: #07ff07;
+}
+
+#btn0:focus.wrong-choice,
+#btn1:focus.wrong-choice,
+#btn2:focus.wrong-choice,
+#btn3:focus.wrong-choice {
+    background-color: #ff0707;
+}
+
+.right-choice, .right-choice:hover {
+    background-color: #07ff07;
+}
+
+.wrong-choice, .wrong-choice:hover {
+    background-color: #ff0707;
 }
 
 #progress {

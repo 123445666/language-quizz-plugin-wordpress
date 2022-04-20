@@ -69,6 +69,7 @@ function lang_quizz_shortcode()
 </div>
 <hr style="margin-top: 50px">
 <footer>
+<p id="progress-next"></p>
 <p id="progress">Question x of y</p>
 </footer>
 </div>
