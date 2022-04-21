@@ -60,37 +60,22 @@ hr {
     background-color: #ffc107;
 }
 
-#btn0:focus,
-#btn1:focus,
-#btn2:focus,
-#btn3:focus {
-    outline: 0;
-}
-
-#btn0:focus.right-choice,
-#btn1:focus.right-choice,
-#btn2:focus.right-choice,
-#btn3:focus.right-choice {
+.right-choice {
     background-color: #07ff07;
     color: #07ff07;
 }
 
-#btn0:focus.wrong-choice,
-#btn1:focus.wrong-choice,
-#btn2:focus.wrong-choice,
-#btn3:focus.wrong-choice {
+.wrong-choice {
     background-color: #ff0707;
     color: #ff0707;
 }
 
-.right-choice, .right-choice:hover {
-    background-color: #07ff07;
+.color-red {
+    color: #ff0707;
+}
+
+.color-green {
     color: #07ff07;
-}
-
-.wrong-choice, .wrong-choice:hover {
-    background-color: #ff0707;
-    color: #ff0707;
 }
 
 .quiz-icon {
@@ -130,7 +115,7 @@ hr {
     margin: 38px auto;
 }
 
-.btn-quizz:hover {
+.btn-quizz:hover, .btn-quizz:active {
     color: #ffffff;
     background-color: #000000;
 }

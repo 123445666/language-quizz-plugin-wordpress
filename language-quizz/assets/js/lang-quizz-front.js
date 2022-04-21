@@ -1,4 +1,10 @@
 function populate() {
+  if (document.getElementById("question") === null) return;
+
+  if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
+    document.getElementById("question").focus();
+  }
+
   getDataJson().then(function (data) {
     // create quiz
     var quiz = new Quiz(data);
@@ -80,6 +86,10 @@ function getMultipleRandom(arr, num) {
   return result;
 }
 
+function insertAfter(referenceNode, newNode) {
+  referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+}
+
 function getDataJson() {
   return fetchDataAsync('/wp-content/uploads/data/quizz-data.json').then(function (dataQuestionsJson) {
     var dataQuestions = [];
@@ -151,7 +161,7 @@ Quiz.prototype.guess = function (answer, buttonElement) {
   if (this.getQuestionIndex().isCorrectAnswer(answer)) {
     this.score++;
     var indexItem = 0;
-    buttonElement.innerHTML += '<div class="quiz-icon"><i class="fa fa-check"></i></div>';
+    buttonElement.innerHTML += '<div class="quiz-icon color-green"><i class="fa fa-check"></i></div>';
 
     buttonElement.classList.add("right-choice");
     if (localStorage.getItem("currentQuestionNumber") !== null) {
@@ -161,14 +171,14 @@ Quiz.prototype.guess = function (answer, buttonElement) {
       firstItemIndex = localStorage.getItem("currentQuestionNumber");
     }
 
-    this.CountdownTimer();
+    this.CountdownTimer(buttonElement);
     return;
   }
 
-  buttonElement.innerHTML += '<div class="quiz-icon"><i class="fa fa-times"></i></div>';
+  buttonElement.innerHTML += '<div class="quiz-icon color-red"><i class="fa fa-times"></i></div>';
   buttonElement.classList.add("wrong-choice");
   localStorage.setItem("QuizIsEnd", 1);
-  this.RestartQuiz();
+  this.RestartQuiz(buttonElement);
 
   //this.questionIndex++;
 }
@@ -184,12 +194,15 @@ Quiz.prototype.isEnded = function () {
   return false;
 }
 
-Quiz.prototype.CountdownTimer = function () {
+Quiz.prototype.CountdownTimer = function (element) {
   var timeleft = 4;
+
+  var el = document.createElement("div");
+  element.appendChild(el);
+
   var downloadTimer = setInterval(function () {
     timeleft--;
-    document.getElementById("progress-next").innerHTML = "<p>" + "Số câu đúng " + localStorage.getItem("currentQuestionNumber") + "</p>";
-    document.getElementById("progress-next").innerHTML += "<p>" + "Câu hỏi tiếp theo sẽ xuất hiện trong " + timeleft + "s" + "</p>";
+    el.innerHTML = "<p>" + "Câu hỏi tiếp theo sẽ xuất hiện trong " + timeleft + "s" + "</p>";
     if (timeleft == 1) {
       location.reload();
       return;
@@ -197,11 +210,15 @@ Quiz.prototype.CountdownTimer = function () {
   }, 1000);
 }
 
-Quiz.prototype.RestartQuiz = function () {
+Quiz.prototype.RestartQuiz = function (element) {
   var timeleft = 4;
+
+  var el = document.createElement("div");
+  element.appendChild(el);
+
   var downloadTimer = setInterval(function () {
     timeleft--;
-    document.getElementById("progress-next").textContent = "Bạn đã trả lời sai !!! " + timeleft + "s";
+    el.innerHTML = "<p>" + "Bạn đã trả lời sai !!! " + timeleft + "s" + "</p>";
     if (timeleft == 1) {
       location.reload();
       return;
