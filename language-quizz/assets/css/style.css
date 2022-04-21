@@ -10,7 +10,6 @@ body {
 }
 
 .buttons img {
-    width: 200px;
     padding: 10px;
 }
 
@@ -50,7 +49,7 @@ hr {
     color: #fff;
     border: none;
     margin: 10px 20px 10px 0px;
-
+    width: 23%;
 }
 
 #btn0:hover,
@@ -94,19 +93,6 @@ hr {
     color: #ff0707;
 }
 
-.overlay {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 100%;
-    width: 100%;
-    opacity: 0;
-    transition: .3s ease;
-    background-color: red;
-}
-
 .quiz-icon {
     font-size: 100px;
     position: absolute;
@@ -124,5 +110,47 @@ hr {
 
 #progress-next {
     font-size: 20px;
-    color: #ff0707;
+    color: #ffc107;
+}
+
+.btn-quizz {
+    transition: all .5s ease;
+    color: #000000;
+    border: 3px solid #000000;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 1;
+    font-size: 17px;
+    background-color: transparent;
+    padding: 10px;
+    outline: none;
+    border-radius: 4px;
+    max-width: 300px;
+    cursor: pointer;
+    margin: 38px auto;
+}
+
+.btn-quizz:hover {
+    color: #ffffff;
+    background-color: #000000;
+}
+
+@media only screen and (max-width: 1235px) {
+
+    #btn0,
+    #btn1,
+    #btn2,
+    #btn3 {
+        width: 45%;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+
+    #btn0,
+    #btn1,
+    #btn2,
+    #btn3 {
+        width: 100%;
+    }
 }

@@ -2,7 +2,6 @@ function populate() {
   getDataJson().then(function (data) {
     // create quiz
     var quiz = new Quiz(data);
-
     if (quiz.isEnded()) {
       showScores();
     } else {
@@ -16,12 +15,9 @@ function populate() {
         element.innerHTML = choices[i].image ? '<img src="' + choices[i].image + '"/>' : choices[i].name;
         guess(quiz, "btn" + i, choices[i].id);
       }
-
       showProgress();
     }
-
-  })
-
+  });
 };
 
 function guess(quiz, id, guess) {
@@ -39,10 +35,17 @@ function showProgress() {
 };
 
 function showScores() {
-  var gameOverHTML = "<h1>Result</h1>";
-  gameOverHTML += "<h2 id='score'> Your scores: " + quiz.score + "</h2>";
+  var gameOverHTML = "";
+  gameOverHTML += "<h2 id='score'> Your scores: " + localStorage.getItem("currentQuestionNumber") + "</h2>";
+  gameOverHTML += "<div id='quizz-reset' class='btn-quizz'> Bắt đầu lại Quiz </div>";
   var element = document.getElementById("quiz");
   element.innerHTML = gameOverHTML;
+  var resetElement = document.getElementById("quizz-reset");
+  resetElement.onclick = (function () {
+    localStorage.setItem("currentQuestionNumber", 0);
+    localStorage.setItem("QuizIsEnd", 0);
+    location.reload();
+  });
 };
 
 async function fetchDataAsync(url) {
@@ -87,7 +90,7 @@ function getDataJson() {
     if (localStorage.getItem("currentQuestionNumber") === null) {
       localStorage.setItem("currentQuestionNumber", 0);
     } else if (localStorage.getItem("currentQuestionNumber") >= totalQuestions) {
-      localStorage.setItem("currentQuestionNumber", 0);
+      localStorage.setItem("QuizIsEnd", 1);
     }
     else {
       firstItemIndex = localStorage.getItem("currentQuestionNumber");
@@ -161,17 +164,24 @@ Quiz.prototype.guess = function (answer, buttonElement) {
     this.CountdownTimer();
     return;
   }
+
   buttonElement.innerHTML += '<div class="quiz-icon"><i class="fa fa-times"></i></div>';
   buttonElement.classList.add("wrong-choice");
-  localStorage.setItem("currentQuestionNumber", 0);
+  localStorage.setItem("QuizIsEnd", 1);
   this.RestartQuiz();
 
   //this.questionIndex++;
 }
 
 Quiz.prototype.isEnded = function () {
+  if (localStorage.getItem("QuizIsEnd") === null) {
+    return false;
+  } else {
+    var isEnd = localStorage.getItem("QuizIsEnd");
+    if (isEnd == 1)
+      return true;
+  }
   return false;
-  //return this.questionIndex === this.questions.length;
 }
 
 Quiz.prototype.CountdownTimer = function () {
@@ -191,7 +201,7 @@ Quiz.prototype.RestartQuiz = function () {
   var timeleft = 4;
   var downloadTimer = setInterval(function () {
     timeleft--;
-    document.getElementById("progress-next").textContent = "Bạn đã trả lời sai, mọi thứ sẽ bắt đầu lại từ đầu trong " + timeleft + "s";
+    document.getElementById("progress-next").textContent = "Bạn đã trả lời sai !!! " + timeleft + "s";
     if (timeleft == 1) {
       location.reload();
       return;
