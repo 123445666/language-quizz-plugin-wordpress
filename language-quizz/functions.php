@@ -25,6 +25,8 @@ require_once QUIZZ_PLUGIN_DIR . 'init.php';
 
 require_once QUIZZ_PLUGIN_DIR . 'constants.php';
 
+require_once QUIZZ_PLUGIN_DIR . 'utils.php';
+
 
 add_action('admin_enqueue_scripts', 'lang_quizz_include_js');
 

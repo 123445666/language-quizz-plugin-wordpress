@@ -8,6 +8,7 @@ function lang_quizz_update()
   $name = $_POST["name"];
   $image = $_FILES["image"];
   $oldimage = $_POST["old-image"];
+  $image_url = $_POST["image_url"];
   $tmp_name = $image["tmp_name"];
   $image_name = $oldimage;
 
@@ -15,11 +16,22 @@ function lang_quizz_update()
   //update
   if (isset($_POST['update'])) {
     if ($tmp_name != "") {
-      $file_name   =   pathinfo($image['name'], PATHINFO_FILENAME) . "." . strtolower(pathinfo($image['name'], PATHINFO_EXTENSION));
+      $file_name   =   stripAccents($name) . "." . strtolower(pathinfo($image['name'], PATHINFO_EXTENSION));
       //$imgtype     =   strtolower(pathinfo($tmp_name, PATHINFO_EXTENSION));
       $image_name  =   QUIZZ_PLUGIN_IMAGES_UPLOADED_URL . $file_name;
 
       move_uploaded_file($tmp_name, QUIZZ_PLUGIN_IMAGES_UPLOADED_DIR . $file_name);
+    } else if ($image_url != "") {
+      $imagetype = end(explode('/', getimagesize($image_url)['mime']));
+
+      $contents = file_get_contents($image_url);
+
+      $image_dir  = QUIZZ_PLUGIN_IMAGES_UPLOADED_DIR . stripAccents($name) . '.' . $imagetype;
+      $image_name  = QUIZZ_PLUGIN_IMAGES_UPLOADED_URL . stripAccents($name) . '.' . $imagetype;
+      var_dump($image_name);
+      $savefile = fopen($image_dir, 'w');
+      fwrite($savefile, $contents);
+      fclose($savefile);
     }
 
     $wpdb->update(
@@ -71,6 +83,7 @@ function lang_quizz_update()
               <!-- <input type="button" value="Upload Image" class="button-primary" id="upload_image" />
               <input type="hidden" name="attachment_id" class="wp_attachment_id" value="<?php echo $image; ?>" /> </br>
               <img src="<?php echo wp_get_attachment_url($image) ?>" class="image" style="margin-top:10px;width:200px;" /> -->
+              <input type="text" name="image_url" class="ss-field-width" /> <br />
               <input type="file" id="upload_image" name="image" value="<?php echo $image; ?>" class="ss-field-width" />
               <input type="hidden" name="old-image" value="<?php echo $image ?>" />
               <img src="<?php echo $image ?>" class="image" style="margin-top:10px;width:200px;" />

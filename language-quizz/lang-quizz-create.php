@@ -4,6 +4,7 @@ function lang_quizz_create()
 {
   $id = $_POST["id"];
   $name = $_POST["name"];
+  $image_url = $_POST["image_url"];
   $image = $_FILES["image"];
   $tmp_name = $image["tmp_name"];
   $image_name = "";
@@ -15,12 +16,24 @@ function lang_quizz_create()
     global $wpdb;
     $table_name = $wpdb->prefix . "lang_quizz";
     if ($tmp_name != "") {
-      $file_name   =   pathinfo($image['name'], PATHINFO_FILENAME) . "." . strtolower(pathinfo($image['name'], PATHINFO_EXTENSION));
+      $file_name   =   stripAccents($name) . "." . strtolower(pathinfo($image['name'], PATHINFO_EXTENSION));
       //$imgtype     =   strtolower(pathinfo($tmp_name, PATHINFO_EXTENSION));
       $image_name  =   QUIZZ_PLUGIN_IMAGES_UPLOADED_URL . $file_name;
 
       move_uploaded_file($tmp_name, QUIZZ_PLUGIN_IMAGES_UPLOADED_DIR . $file_name);
+    } else if ($image_url != "") {
+      $imagetype = end(explode('/', getimagesize($image_url)['mime']));
+
+      $contents = file_get_contents($image_url);
+
+      $image_dir  = QUIZZ_PLUGIN_IMAGES_UPLOADED_DIR . stripAccents($name) . '.' . $imagetype;
+      $image_name  = QUIZZ_PLUGIN_IMAGES_UPLOADED_URL . stripAccents($name) . '.' . $imagetype;
+      var_dump($image_name);
+      $savefile = fopen($image_dir, 'w');
+      fwrite($savefile, $contents);
+      fclose($savefile);
     }
+
     $wpdb->insert(
       $table_name, //table
       array('name' => $name, 'image' => $image_name, 'notes' => $notes), //data
@@ -48,6 +61,7 @@ function lang_quizz_create()
               <!-- <input type="button" value="Upload Image" class="button-primary" id="upload_image" />
               <input type="<?php echo (empty($image) ? "hidden" : "text"); ?>" name="attachment_id" class="wp_attachment_id" value="<?php echo $image; ?>" /> </br>
               <img src="" class="image" style="display:none;margin-top:10px;width:200px;" /> -->
+              <input type="text" name="image_url" value="<?php echo $image; ?>" class="ss-field-width" /> <br />
               <input type="file" id="upload_image" name="image" value="<?php echo $image; ?>" class="ss-field-width" />
             </td>
           </tr>
