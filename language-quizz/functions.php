@@ -47,7 +47,7 @@ add_action('wp_enqueue_scripts', "add_lang_files");
 function add_lang_files()
 {
   wp_enqueue_script('lang-quizz-script', QUIZZ_PLUGIN_ASSET . 'js/lang-quizz-front.js', false, '2.0.0', true);
-  wp_enqueue_style('lang-quizz-stylesheet', QUIZZ_PLUGIN_ASSET . '/css/style.css', false, '2.0.0', 'all');
+  wp_enqueue_style('lang-quizz-stylesheet', QUIZZ_PLUGIN_ASSET . 'css/style.css', false, '2.0.0', 'all');
 }
 
 // function that runs when shortcode is called

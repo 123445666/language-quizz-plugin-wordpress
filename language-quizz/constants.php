@@ -37,4 +37,4 @@ if (!defined('QUIZZ_PLUGIN_DIRNAME'))
     define('QUIZZ_PLUGIN_DIRNAME', dirname(QUIZZ_PLUGIN_BASENAME));
 
 if (!defined('QUIZZ_PLUGIN_ASSET'))
-    define('QUIZZ_PLUGIN_ASSET', QUIZZ_PLUGIN_URL . '/assets/');
+    define('QUIZZ_PLUGIN_ASSET', QUIZZ_PLUGIN_URL . 'assets/');
