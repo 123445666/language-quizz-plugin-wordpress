@@ -10,11 +10,11 @@
 }
 
 .grid hr {
-    margin-top: 50px;
     color: red;
     background-color: #ffc107;
     height: 2px;
     border: none;
+    margin-bottom: 20px
 }
 
 #score {
@@ -114,6 +114,16 @@
 .btn-quizz:hover, .btn-quizz:active {
     color: #ffffff;
     background-color: #000000;
+}
+
+#above-home-main {
+    min-width: 100%;
+}
+
+#quiz h3 {
+    font-family: "monospace";
+    font-size: 24px;
+    text-align: center;
 }
 
 @media only screen and (max-width: 1235px) {
