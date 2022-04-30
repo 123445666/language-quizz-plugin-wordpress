@@ -6,14 +6,13 @@ const CopyPlugin = require("copy-webpack-plugin");
 
 const buildPath = path.resolve(__dirname, "dist");
 
-const prototypes = ["form-control"];
 const pages = ["landing"];
 
 module.exports = {
   // https://webpack.js.org/configuration/mode/
   // mode: 'production',
   mode: "development",
- 
+
   // This option controls if and how source maps are generated.
   // https://webpack.js.org/configuration/devtool/
   // devtool: "source-map",
@@ -114,17 +113,6 @@ module.exports = {
             inject: true,
             chunks: ["index"],
             filename: `${page}.html`,
-          })
-      )
-    )
-    .concat(
-      prototypes.map(
-        (pro) =>
-          new HtmlWebpackPlugin({
-            template: `./src/layouts/prototype/${pro}.html`,
-            inject: true,
-            chunks: ["index"],
-            filename: `${pro}.html`,
           })
       )
     ),

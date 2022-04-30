@@ -91,7 +91,7 @@ $(function () {
   }
 
   function getDataJson() {
-    return fetchDataAsync('http://localhost:8080/vendors/quizz/quizz-data.json').then(function (dataQuestionsJson) {
+    return fetchDataAsync('/wp-content/uploads/data/quizz-data.json').then(function (dataQuestionsJson) {
       var dataQuestions = [];
       var choiceList = [];
       var firstItemIndex = 0;
