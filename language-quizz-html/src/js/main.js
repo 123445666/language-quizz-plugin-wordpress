@@ -1,6 +1,6 @@
 import "../styles/main.css";
 
-$(function () {
+jQuery(function () {
   function populate() {
     if (document.getElementById("question") === null) return;
 
@@ -41,7 +41,7 @@ $(function () {
 
   function showScores() {
     var gameOverHTML = "<div class='p-5'>";
-    gameOverHTML += "<h3 id='score' class='flex-auto text-5xl mb-5 text-yellow-900'> Your scores: <br/><div class='text-red-300 text-center'>" + localStorage.getItem("currentQuestionNumber") + "</div></h3>";
+    gameOverHTML += "<h3 id='score' class='flex-auto text-4xl mb-5 text-yellow-900'> Your scores: <br/><div class='text-red-300 text-center'>" + localStorage.getItem("currentQuestionNumber") + "</div></h3>";
     gameOverHTML += "<div id='quizz-reset' class='mt-3 text-center sm:mt-0 py-2 px-8 bg-orange-200 hover:bg-red-200 hover:shadow-2xl font-bold text-yellow-900 rounded-lg shadow-md cursor-pointer'> Bắt đầu lại Quiz </div>";
     gameOverHTML += "</div>";
     var element = document.getElementById("quiz");

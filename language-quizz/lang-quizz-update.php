@@ -54,7 +54,7 @@ function lang_quizz_update()
     }
   }
 ?>
-  <link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/language-quizz/css/style-admin.css" rel="stylesheet" />
+  <link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/language-quizz/assets/styles/style-admin.css" rel="stylesheet" />
   <div class="wrap">
     <h2><?php echo QUIZZ_PLUGIN_EDIT; ?></h2>
 

@@ -3,7 +3,7 @@
 function lang_quizz_list()
 {
 ?>
-    <link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/cute-testimonials/style-admin.css" rel="stylesheet" />
+    <link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/language-quizz/assets/styles/style-admin.css" rel="stylesheet" />
     <div class="wrap">
         <h2><?php echo QUIZZ_PLUGIN_NAME; ?></h2>
         <div class="tablenav top">

@@ -42,7 +42,7 @@ function lang_quizz_create()
     $message .= QUIZZ_PLUGIN_NAME . " inserted";
   }
 ?>
-  <link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/language-quizz/style-admin.css" rel="stylesheet" />
+  <link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/language-quizz/assets/styles/style-admin.css" rel="stylesheet" />
   <div class="wrap">
     <h2><?php echo QUIZZ_PLUGIN_CREATE; ?></h2>
     <?php if (isset($message)) : ?><div class="updated">
