@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<%= require('../partials/head.html?raw') %>
+
+  <body>
+
+    <%= require('../partials/header.html?raw') %>
+
+    <aside id="above-home-main" class="w-full mb-6 widget-area widget-area-above-home-main active-1"
+            role="complementary">
+            <div id="quiz" class="flex flex-wrap items-center justify-center bg-gray-100 rounded-lg shadow-lg p-5">
+              <div class="header w-full p-6">
+                <div class="w-full flex-none mb-3 text-2xl leading-none text-slate-900 text-center">
+                  <h3 class="mb-3 text-yellow-900">Quizz Từ vựng Tiếng Pháp</h3>
+                  <h2 id="question" class="flex-auto text-5xl text-red-500 text-yellow-900"></h2>
+                </div>
+              </div>
+              <section class="buttons grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 m-4">
+                <div>
+                  <div id="btn0" class="bg-white relative hover:shadow-2xl"><span id="choice0"></div>
+                  <div class="quiz-icon text-red-700"></div>
+                </div>
+                <div>
+                  <div id="btn1" class="bg-white relative hover:shadow-2xl"><span id="choice1"></div>
+                  <div class="quiz-icon text-green-400"></div>
+                </div>
+                <div>
+                  <div id="btn2" class="bg-white relative hover:shadow-2xl"><span id="choice2"></span></div>
+                  <div class="quiz-icon"></div>
+                </div>
+                <div>
+                  <div id="btn3" class="bg-white relative hover:shadow-2xl"><span id="choice3"></span></div>
+                  <div class="quiz-icon"></div>
+                </div>
+              </section>
+            </div>
+          </aside>
+          
+      <%= require('../partials/footer.html?raw') %>
+
+      <div class="text-red-300 bg-orange-200 hover:bg-red-200 text-yellow-900"></div>
+  </body>
+
+</html>

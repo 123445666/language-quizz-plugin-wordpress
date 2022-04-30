@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  /* @variants hover, focus {
+    .buttonrevert-gray {
+      @apply ring-2;
+      @apply ring-offset-2;
+      @apply ring-offset-gray-800;
+      @apply ring-white;
+      @apply bg-white;
+      @apply text-gray-700;
+    }
+  } */
+}
+.mega-menu {
+  display: none;
+  left: 0;
+  position: absolute;
+  text-align: left;
+  width: 100%;
+}
+
+/* #hoverable Class Styles */
+.hoverable {
+  position: static;
+}
+
+.hoverable > a:after {
+  content: '\25BC';
+  font-size: 10px;
+  padding-left: 6px;
+  position: relative;
+  top: -1px;
+}
+
+.hoverable:hover .mega-menu {
+  display: block;
+}
+
+/* #toggle Class Styles */
+
+.toggleable > label:after {
+  content: '\25BC';
+  font-size: 10px;
+  padding-left: 6px;
+  position: relative;
+  top: -1px;
+}
+
+.toggle-input {
+  display: none;
+}
+.toggle-input:not(checked) ~ .mega-menu {
+  display: none;
+}
+
+.toggle-input:checked ~ .mega-menu {
+  display: block;
+}
+
+.toggle-input:checked + label {
+  color: white;
+  @apply bg-red-300;
+}
+
+.toggle-input:checked ~ label:after {
+  content: '\25B2';
+  font-size: 10px;
+  padding-left: 6px;
+  position: relative;
+  top: -1px;
+}
+
+/* Radio choice button */
+.filter-switch label {
+  cursor: pointer;
+}
+.filter-switch-item input:checked + label {
+  color: white;
+  @apply bg-red-300;
+}
+.filter-switch-item input:not(:checked) + label {
+  --bg-opacity: 0;
+  box-shadow: none;
+}
+
+/* quizz */
+.quiz-icon {
+  font-size: 100px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
