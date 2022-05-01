@@ -24,7 +24,7 @@ jQuery(function () {
         var choices = quiz.getQuestionIndex().choices;
         for (var i = 0; i < choices.length; i++) {
           var element = document.getElementById("choice" + i);
-          element.innerHTML = choices[i].image ? '<img alt="' + choices[i].name + '" class="object-cover rounded-lg shadow border-2 border-solid border-white transition-all ease-in-out duration-300 cursor-pointer" src="' + choices[i].image + '"/>' : choices[i].name;
+          element.innerHTML = choices[i].image ? '<img width="500" height="350" alt="' + choices[i].name + '" class="object-cover rounded-lg shadow border-2 border-solid border-white transition-all ease-in-out duration-300 cursor-pointer" src="' + choices[i].image + '"/>' : choices[i].name;
           guess(quiz, "btn" + i, choices[i].id);
         }
       }
